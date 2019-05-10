@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #box {
+        display: flex;
+        justify-content: start;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="total"></div>
+    <div id="box"></div>
+  </body>
+  <script>
+    var arr = [
+      {
+        date: "5.10",
+        info: [
+          {
+            地铁: 10
+          },
+          {
+            早餐: 10
+          },
+          {
+            午餐: 23
+          },
+          {
+            矿泉水: 2.5
+          },
+          {
+            牛仔裤: 88
+          }
+        ]
+      }
+    ];
+    var total = 0;
+    arr.forEach(ele => {
+      var boxDay = document.createElement("div");
+      var dateTit = document.createElement("h4");
+      dateTit.innerText = ele.date;
+      boxDay.appendChild(dateTit);
+      var boxInfo = document.createElement("ul");
+      var totalDay = 0;
+      ele.info.forEach(ele => {
+        for (key in ele) {
+          total += ele[key];
+          totalDay += ele[key];
+          var li = document.createElement("li");
+          var spanKey = document.createElement("span");
+          spanKey.innerText = key + ":";
+          li.appendChild(spanKey);
+          var spanVal = document.createElement("span");
+          spanVal.innerText = ele[key];
+          li.appendChild(spanVal);
+          boxInfo.appendChild(li);
+        }
+      });
+      var p = document.createElement("p");
+      var totalBox = document.getElementById("total");
+      totalBox.innerText = "月总额:" + total;
+      p.innerText = "日总额:" + totalDay;
+      boxDay.appendChild(p);
+      boxDay.appendChild(boxInfo);
+      var box = document.getElementById("box");
+      box.appendChild(boxDay);
+    });
+  </script>
+</html>
