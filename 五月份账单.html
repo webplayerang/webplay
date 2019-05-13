@@ -11,6 +11,17 @@
         justify-content: start;
         flex-wrap: wrap;
       }
+      #total {
+        margin: 10px 0;
+        text-align: center;
+      }
+      li {
+        list-style-type: none;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+      }
     </style>
   </head>
   <body>
@@ -21,51 +32,68 @@
     var arr = [
       {
         date: "5.10",
-        info: [
-          {
-            地铁: 10
-          },
-          {
-            早餐: 10
-          },
-          {
-            午餐: 23
-          },
-          {
-            矿泉水: 2.5
-          },
-          {
-            牛仔裤: 88
-          }
-        ]
+        info: {
+          地铁: 10,
+          早餐: 10,
+          午餐: 23,
+          矿泉水: 4.5,
+          牛仔裤: 88,
+          晚餐: 18
+        }
+      },
+      {
+        date: "5.11",
+        info: {
+          地铁: 8,
+          奈雪茶: 56
+        }
+      },
+      {
+        date: "5.12",
+        info: {
+          午饭: 16.8,
+          晚饭: 31.54
+        }
+      },
+      {
+        date: "5.13",
+        info: {
+          地铁: 10,
+          早餐: 7,
+          垃圾桶: 7.8,
+          旋转拖把: 48,
+          挂钩: 9.34
+        }
       }
     ];
     var total = 0;
     arr.forEach(ele => {
       var boxDay = document.createElement("div");
+      boxDay.style.marginBottom = 10 + "px";
+      boxDay.style.marginLeft = 5 + "px";
+      boxDay.style.marginRight = 5 + "px";
       var dateTit = document.createElement("h4");
       dateTit.innerText = ele.date;
+      dateTit.style.marginBottom = 10 + "px";
       boxDay.appendChild(dateTit);
       var boxInfo = document.createElement("ul");
       var totalDay = 0;
-      ele.info.forEach(ele => {
-        for (key in ele) {
-          total += ele[key];
-          totalDay += ele[key];
-          var li = document.createElement("li");
-          var spanKey = document.createElement("span");
-          spanKey.innerText = key + ":";
-          li.appendChild(spanKey);
-          var spanVal = document.createElement("span");
-          spanVal.innerText = ele[key];
-          li.appendChild(spanVal);
-          boxInfo.appendChild(li);
-        }
-      });
+      for (key in ele.info) {
+        total += ele.info[key];
+        totalDay += ele.info[key];
+        var li = document.createElement("li");
+        var spanKey = document.createElement("span");
+        spanKey.innerText = key + ":";
+        li.appendChild(spanKey);
+        var spanVal = document.createElement("span");
+        spanVal.innerText = ele.info[key];
+        li.appendChild(spanVal);
+        boxInfo.appendChild(li);
+      }
       var p = document.createElement("p");
       var totalBox = document.getElementById("total");
-      totalBox.innerText = "月总额:" + total;
-      p.innerText = "日总额:" + totalDay;
+      totalBox.innerText = "月总额:" + total.toFixed(2);
+      p.innerText = "日总额:" + totalDay.toFixed(2);
       boxDay.appendChild(p);
       boxDay.appendChild(boxInfo);
       var box = document.getElementById("box");
